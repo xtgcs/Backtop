@@ -1,0 +1,93 @@
+$toolbar-size:52px;
+.toolbar-item,.toolbar-layer{
+    background-image: url("../image/toolbar.png");
+    background-repeat: no-repeat;
+}
+@mixin toolbar-item($pos,$posHover){
+    background-position: 0px $pos;
+    &:hover{
+      background-position: 0px $posHover;
+    }
+}
+@mixin transition($transition){
+    -webkit-transition:$transition;
+    -moz-transition:$transition;
+    -ms-transition:$transition;
+    -o-transition:$transition;
+    transition:$transition;
+}
+@mixin transform-origin($origin){
+      -webkit-transform-origin:$origin;
+      -moz-transform-origin:$origin;
+      -ms-transform-origin:$origin;
+      -o-transform-origin:$origin;
+      transform-origin:$origin;
+}
+@mixin transform($transform){
+      -webkit-transform:scale($transform);
+      -moz-transform:scale($transform);;
+      -ms-transform:scale($transform);;
+      -o-transform:scale($transform);;
+      transform:scale($transform);;
+}
+@mixin opacity($opacity){
+   opacity: $opacity;
+   filter: alpha(opacity=$opacity * 100);
+}
+@mixin toolbar-layer($p,$y){
+  height: $p;
+  background-position: 0px $y;
+}
+.title{
+  text-align: center;
+}
+.toolbar{
+   position: fixed;
+   right: 0;
+   bottom:0;
+}
+.toolbar-item{
+   position: relative;
+   display: block;
+   width: $toolbar-size;
+   height: $toolbar-size;
+   margin-top: 1px;
+  @include transition(background-position 1s);
+
+  &:hover{
+     .toolbar-layer{
+       @include transform(1);
+       @include opacity(1);
+     }
+   ;
+   }
+}
+.toolbar-item-weixin{
+    @include toolbar-item(-798px,-860px);
+   .toolbar-layer{
+      @include toolbar-layer(212px,0px);
+   }
+}
+.toolbar-item-feedback{
+  @include toolbar-item(-426px,-488px);
+}
+.toolbar-item-app{
+  @include toolbar-item(-550px,-612px);
+
+  .toolbar-layer{
+    @include toolbar-layer(194px,-222px);
+  }
+}
+.toolbar-item-top{
+  @include toolbar-item(-674px,-736px);
+}
+.toolbar-layer{
+    position:absolute;
+    right: $toolbar-size - 6;
+    bottom: -10px;
+    width: 172px;
+    @include opacity(0);
+    @include transform(0.01);
+    @include transform-origin(95% 95%);
+    @include transition(all 1s);
+}
